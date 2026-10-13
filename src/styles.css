@@ -1,0 +1,155 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --radius-xl: calc(var(--radius) + 6px);
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Manrope", system-ui, sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-ivory: var(--ivory);
+  --color-navy: var(--navy);
+  --color-navy-deep: var(--navy-deep);
+  --color-line: var(--line);
+}
+
+:root {
+  --radius: 0.375rem;
+  --navy: oklch(0.175 0.028 262); /* #0B1220 */
+  --navy-deep: oklch(0.225 0.035 262); /* #111C30 */
+  --gold: oklch(0.73 0.08 80); /* #C5A46D */
+  --gold-soft: oklch(0.73 0.08 80 / 18%);
+  --ivory: oklch(0.973 0.006 95); /* #F7F6F2 */
+  --line: oklch(0.973 0.006 95 / 9%);
+
+  --background: var(--navy);
+  --foreground: var(--ivory);
+  --card: var(--navy-deep);
+  --card-foreground: var(--ivory);
+  --popover: var(--navy-deep);
+  --popover-foreground: var(--ivory);
+  --primary: var(--gold);
+  --primary-foreground: var(--navy);
+  --secondary: var(--navy-deep);
+  --secondary-foreground: var(--ivory);
+  --muted: oklch(0.26 0.03 262);
+  --muted-foreground: oklch(0.72 0.012 255);
+  --accent: oklch(0.26 0.03 262);
+  --accent-foreground: var(--ivory);
+  --destructive: oklch(0.6 0.2 27);
+  --destructive-foreground: var(--ivory);
+  --border: var(--line);
+  --input: oklch(0.973 0.006 95 / 14%);
+  --ring: var(--gold);
+
+  --shadow-device: 0 40px 80px -30px oklch(0 0 0 / 70%), 0 0 0 1px oklch(1 0 0 / 6%);
+  --glow-gold: radial-gradient(60% 50% at 70% 40%, oklch(0.73 0.08 80 / 10%), transparent 70%);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+  ::selection {
+    background: var(--gold);
+    color: var(--navy);
+  }
+  :focus-visible {
+    outline: 1px solid var(--gold);
+    outline-offset: 3px;
+  }
+}
+
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+@utility glow-gold {
+  background-image: var(--glow-gold);
+}
+@utility shadow-device {
+  box-shadow: var(--shadow-device);
+}
+
+@utility grid-lines {
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+}
+
+@utility reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+  &.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+}

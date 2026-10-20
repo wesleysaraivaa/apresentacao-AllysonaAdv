@@ -1,9 +1,3 @@
-/**
- * Configurações editáveis da apresentação.
- * Preencha WHATSAPP_NUMBER (somente dígitos, com DDI e DDD, ex.: "5588999999999")
- * e DEVELOPER_NAME quando quiser. Enquanto vazios, o botão de contato
- * leva à seção de encerramento e a assinatura omite o nome.
- */
 export const DEMO_URL = "https://allysson-carvalho-advocacia.vercel.app/";
 export const WHATSAPP_NUMBER = "";
 export const WHATSAPP_MESSAGE =
